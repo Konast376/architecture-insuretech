@@ -1,0 +1,35 @@
+"""Корневые операции чтения client-info."""
+type Query {
+  """Получить клиента по идентификатору. Вложенные поля выбираются потребителем."""
+  client(id: ID!): Client
+}
+
+"""Карточка клиента."""
+type Client {
+  id: ID!
+  name: String
+  age: Int
+
+  """Документы клиента. Resolver загружает данные только при наличии поля в selection set."""
+  documents: [Document!]!
+
+  """Родственники клиента. Resolver загружает данные только при наличии поля в selection set."""
+  relatives: [Relative!]!
+}
+
+"""Документ клиента."""
+type Document {
+  id: ID!
+  type: String
+  number: String
+  issueDate: String
+  expiryDate: String
+}
+
+"""Информация о родственнике клиента."""
+type Relative {
+  id: ID!
+  relationType: String
+  name: String
+  age: Int
+}
